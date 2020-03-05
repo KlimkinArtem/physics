@@ -14,10 +14,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+
+        guard let windowScence = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScence.coordinateSpace.bounds)
+        window?.windowScene = windowScence
+        window?.rootViewController = createTabBar()
+        createTabBar().tabBar.isHidden = true
+        window?.makeKeyAndVisible()
+        configureNavigationBar()
+        
+    }
+    
+    func createSectionNC() -> UINavigationController{
+        let section = SectionVC()
+        section.title = "Разделы"
+        section.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+        return UINavigationController(rootViewController: section)
+    }
+    
+    func createFavoritesNC() -> UINavigationController{
+        let favorites = FavoritesVC()
+        favorites.title = "Избранное"
+        favorites.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        return UINavigationController(rootViewController: favorites)
+    }
+    
+    func createTabBar() -> UITabBarController{
+        let tabBar = UITabBarController()
+        UITabBar.appearance().tintColor = .systemGreen
+        tabBar.viewControllers = [createSectionNC(), createFavoritesNC()]
+        return tabBar
+    }
+    
+    func configureNavigationBar(){
+        UINavigationBar.appearance().tintColor = .systemGreen
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

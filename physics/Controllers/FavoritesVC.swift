@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FavoritesVC.swift
 //  physics
 //
 //  Created by Артем Климкин on 27/02/2020.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FavoritesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
+        view.backgroundColor = .yellow
+    }
+    
 
 }
-
